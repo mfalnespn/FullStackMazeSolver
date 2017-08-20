@@ -43,7 +43,7 @@ angular.module('MazeControllers', ['ngRoute'])
                     });
                 }
                 else{
-                    $scope.alert("Please upload a maze for solving.")
+                    window.alert("Please upload a maze for solving.")
                 }
             };
 
