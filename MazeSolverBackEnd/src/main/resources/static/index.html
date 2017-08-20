@@ -29,13 +29,11 @@
     </style>
 </head>
 <body ng-controller="MazeCtrl">
-
-  <input data-file type="file" id="file" name="file" onchange="angular.element(this).scope().parseFile()"/>
-    <br/>
-    <br/>
-  <button ng-click="solve()">Solve</button>
-    <br/>
-    <br/>
+  <p>Maze file:</p>
+  <input data-file type="file" id="file" name="file" ="Your label here." onchange="angular.element(this).scope().parseFile()">
+    <br/><br/>
+  <button ng-if="mazeText != ''" ng-click="solve()">Solve</button>
+    <br/><br/>
   <table style="border-collapse: collapse" cellspacing=0>
       <tr ng-repeat="row in maze">
           <td width="10px" height="10px" ng-repeat="column in row track by $index" ng-class="{ 'open' : column == '.', 'wall' : column == '#', 'start' : column == 'A', 'end' : column == 'B', 'path' : column == '@' }"></td>
