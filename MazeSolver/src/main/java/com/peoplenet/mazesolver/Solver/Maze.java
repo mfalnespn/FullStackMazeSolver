@@ -11,11 +11,17 @@ public class Maze {
     private Vertex endVertex = new Vertex();
     private char[][] maze;
     private List<Vertex> solution;
+    private long solutionSteps;
 
     public Maze(){
         init();
     }
 
+    /**
+     * Create a 2 dimensional array representing the maze
+     * @param input the text representation of the maze.
+     * @return this
+     */
     public Maze createMaze(String input){
         init();
         String[] arr = input.split("\n");
@@ -41,9 +47,16 @@ public class Maze {
         return this;
     }
 
+    /**
+     *
+     * @return true if the maze was solved. False otherwise.
+     */
     public boolean solveMaze(){
         MazeSolvingAlgorithm algorithm = new AStarAlgorithm();
         Vertex v = algorithm.execute(maze, startVertex, endVertex);
+        if(v != null){
+            solutionSteps = v.getDistance();
+        }
         while(v != null){
             solution.add(v);
             v = v.getPrevious();
@@ -52,6 +65,9 @@ public class Maze {
         return !solution.isEmpty();
     }
 
+    /**
+     * @return the string representation of the solved maze.
+     */
     public String getSolutionString(){
         StringBuilder sb = new StringBuilder();
         for(int y = 0; y < maze.length; y++){
@@ -69,18 +85,13 @@ public class Maze {
         return sb.toString();
     }
 
-    public void printSolution(){
-        System.out.println(getSolutionString());
+    /**
+     * @return number of steps in solution
+     */
+    public long getSolutionSteps() {
+        return solutionSteps;
     }
 
-    public void print(){
-        for(int y = 0; y < maze.length; y++){
-            for(int x = 0; x < maze[0].length; x++){
-                System.out.print(maze[y][x]);
-            }
-            System.out.println();
-        }
-    }
     private void init(){
         startVertex = new Vertex();
         endVertex = new Vertex();

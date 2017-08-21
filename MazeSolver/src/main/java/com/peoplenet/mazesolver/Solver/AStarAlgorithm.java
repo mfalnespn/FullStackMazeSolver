@@ -13,6 +13,9 @@ public class AStarAlgorithm implements MazeSolvingAlgorithm {
     private Coordinate start, end;
 
     @Override
+    /**
+     * Executes A* path finding algorithm to find the shortest path.
+     */
     public Vertex execute(char[][] maze, Vertex start, Vertex end) {
         this.maze = maze;
         start.setDistance(0);
@@ -37,14 +40,6 @@ public class AStarAlgorithm implements MazeSolvingAlgorithm {
 
             if(cur.getCoordinate().getX() == end.getCoordinate().getX() && cur.getCoordinate().getY() == end.getCoordinate().getY()){
                 //Solution found
-                //Go back through linked list to set up next vertex to go forward from the start
-                /*
-                Vertex temp = cur;
-                while(cur.getPrevious() != null){
-                    cur = cur.getPrevious();
-                    cur.setNext(temp);
-                }
-                */
                 return cur;
             }
             else{
@@ -62,6 +57,13 @@ public class AStarAlgorithm implements MazeSolvingAlgorithm {
         return null;
     }
 
+    /**
+     * Returns a list of child vertices of the root vertex.
+     * Child vertices are all possible moves that can be made in the puzzle.
+     *
+     * @param root The root vertex
+     * @return List of child vertices.
+     */
     private List<Vertex> expand(Vertex root){
         List<Vertex> children = new ArrayList<>();
         int x = root.getCoordinate().getX();
@@ -73,12 +75,26 @@ public class AStarAlgorithm implements MazeSolvingAlgorithm {
         return children;
     }
 
+    /**
+     * Adds child vertex to the list if the vertex can be reached and that it does not already occur on the path.
+     *
+     * @param children list of child vertices
+     * @param x x coordinate of possible child vertex
+     * @param y y coordinate of possible child vertex
+     */
     private void addChildCoordinate(List<Vertex> children, int x, int y){
         Vertex vertex = makeMove(x, y);
         if(vertex != null && !occursOnPath(vertex, vertex.getPrevious()))
             children.add(vertex);
     }
 
+    /**
+     * Attempt to move to position (x,y)
+     *
+     * @param x the x coordinate
+     * @param y the y coordinate
+     * @return Vertex representing the move made, or null if move cannot be made.
+     */
     private Vertex makeMove(int x, int y){
         if(x >= 0 && x < maze[0].length && y >= 0 && y < maze.length && maze[y][x] != '#') {
             return new Vertex(new Coordinate(x,y));
@@ -86,6 +102,12 @@ public class AStarAlgorithm implements MazeSolvingAlgorithm {
         return null;
     }
 
+    /**
+     * Check if the vertex cur is already on the current path.
+     * @param cur current vertex
+     * @param predecessor a vertex preceding the current vertex.
+     * @return true if cur is already in the path. False otherwise.
+     */
     private boolean occursOnPath(Vertex cur, Vertex predecessor){
         if(predecessor == null){
             return false;

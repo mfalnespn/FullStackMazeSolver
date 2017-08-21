@@ -46,14 +46,6 @@ public class Vertex {
         return Math.abs(end.coordinate.getX() - this.coordinate.getX()) + Math.abs(end.coordinate.getY()-this.coordinate.getY());
     }
 
-    public boolean isClosed() {
-        return isClosed;
-    }
-
-    public void setClosed(boolean closed) {
-        isClosed = closed;
-    }
-
     @Override
     public boolean equals(Object obj) {
         Vertex v = (Vertex) obj;
