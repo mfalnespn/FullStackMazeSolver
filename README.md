@@ -6,6 +6,6 @@ Setup for Windows:
 4. Open a command prompt.  
     * Navigate to your project root folder.  
     * From your project root folder, run (Path/to/gradle/bin)/gradle build. Wait for this to complete.  
-    * Run "java -jar build\libs\MazeSolverBackEnd-0.0.1-SNAPSHOT.jar"  
+    * Run "java -jar build\libs\MazeSolver-0.0.1-SNAPSHOT.jar"  
 
 The web application should now be running. Open a browser and enter the url http://localhost:8080.  
