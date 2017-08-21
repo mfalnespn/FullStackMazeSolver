@@ -30,7 +30,7 @@
 </head>
 <body ng-controller="MazeCtrl">
   <p>Maze file:</p>
-  <input data-file type="file" id="file" name="file" ="Your label here." onchange="angular.element(this).scope().parseFile()">
+  <input type="file" id="file" name="file" custom-on-change="parseFile">
     <br/><br/>
   <button ng-if="mazeText != ''" ng-click="solve()">Solve</button>
     <br/><br/>

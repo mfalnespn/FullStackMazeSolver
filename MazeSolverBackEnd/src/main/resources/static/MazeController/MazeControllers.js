@@ -47,7 +47,7 @@ angular.module('MazeControllers', ['ngRoute'])
                 }
             };
 
-            $scope.parseFile = function(){
+            $scope.parseFile = function(event){
                 var f = event.target.files[0],
                     r = new FileReader();
 
@@ -62,18 +62,12 @@ angular.module('MazeControllers', ['ngRoute'])
             };
         }
     ])
-    .directive('dataFile', function() {
+    .directive('customOnChange', function() {
         return {
-            require:"ngModel",
             restrict: 'A',
-            link: function($scope, el, attrs, ngModel){
-                el.bind('change', function(event){
-                    var files = event.target.files;
-                    var file = files[0];
-
-                    ngModel.$setViewValue(file);
-                    $scope.$apply();
-                });
+            link: function (scope, element, attrs) {
+                var onChangeHandler = scope.$eval(attrs.customOnChange);
+                element.bind('change', onChangeHandler);
             }
         };
     });
